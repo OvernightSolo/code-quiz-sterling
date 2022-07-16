@@ -1,4 +1,4 @@
-const startingMinutes = 0.05;
+const startingMinutes = 0.1;
 let time = startingMinutes * 60;
 
 const countdownEl = document.getElementById("countdown");
@@ -13,29 +13,18 @@ function updateCountdown() {
 
   countdownEl.innerHTML = `${minutes}:${seconds}`;
   time--;
-  time = time <= 0 ? 0 : time;
-  // timerEl.textContent = "Time's Up!";
+
+  if (time < 0) {
+    countdownEl.innerHTML = "Time's Up!";
+  }
 }
 
-// var timerEl = document.querySelector("#time");
+var startButton = document.querySelector("#start-button");
 
-// function countdown() {
-//   var timeLeft = 10;
+startButton.addEventListener("click", function () {
+  updateCountdown();
+});
 
-//   var timeInterval = setInterval(function () {
-//     if (timeLeft > 1) {
-//       timerEl.textContent = timeLeft + " seconds remaining";
-//       timeLeft--;
-//     } else if (timeLeft === 1) {
-//       timerEl.textContent = timeLeft + " second remaining";
-//       timeLeft--;
-//     } else {
-//       timerEl.textContent = "Time's Up!";
-//       clearInterval(timeInterval);
-//     }
-//   }, 1000);
-// }
-// countdown();
 //////////////SEPARATOR
 // var questions = [
 //   {
