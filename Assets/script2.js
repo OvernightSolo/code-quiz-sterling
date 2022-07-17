@@ -4,6 +4,7 @@ var questionElement = document.getElementById("question");
 var answerButtonsEl = document.getElementById("answer-buttons");
 var nextButton = document.getElementById("next-btn");
 var shuffledQuestions, currentQuestionIndex;
+var timerEl = document.getElementById("timer");
 
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", () => {
@@ -13,7 +14,7 @@ nextButton.addEventListener("click", () => {
 
 function startQuiz() {
   alert("The timer is about to begin.");
-  startTimer();
+  countdown();
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
@@ -116,30 +117,19 @@ var questions = [
   },
 ];
 
-var startingMinutes = 0.1;
-var time = startingMinutes * 60;
-var timer = setInterval;
-var countdownEl = document.getElementById("timer");
-setInterval(updateCountdown, 1000);
-
-function startTimer() {
-  function updateCountdown() {
-    const minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    countdownEl.innerHTML = `${minutes}:${seconds}`;
-    time--;
-
-    if (time < 0) {
-      countdownEl.innerHTML = "Time's Up!";
+function countdown() {
+  var sec = 30;
+  console.log("timer suppose to go");
+  var timer = setInterval(function () {
+    sec--;
+    document.getElementById("timer").innerHTML = sec;
+    if (sec < 0) {
+      clearInterval(timer);
+      alert("Time is up!");
     }
-  }
-
-  var start = document.getElementById("start-btn");
-
-  start.addEventListener("click", function () {
-    updateCountdown();
-  });
+  }, 1000);
 }
+document.getElementsByClassName("wrong").addEventListener("click", function () {
+  sec -= 10;
+  document.getElementById("timer").innerHTML = sec;
+});

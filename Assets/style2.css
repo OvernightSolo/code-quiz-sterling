@@ -87,6 +87,7 @@ header {
   height: 55px;
   align-items: center;
   font-size: 2rem;
+  font-weight: bold;
 }
 
 footer {
