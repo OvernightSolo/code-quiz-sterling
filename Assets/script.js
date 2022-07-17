@@ -1,28 +1,27 @@
+//This is a short amount of time, just for testing. The final product will be a 3-minute timer.
 const startingMinutes = 0.1;
 let time = startingMinutes * 60;
 
-const countdownEl = document.getElementById("countdown");
+const countdownEl = document.getElementById("timer");
 
-setInterval(updateCountdown, 1000);
+setInterval(startTimer, 1000);
 
-function updateCountdown() {
-  const minutes = Math.floor(time / 60);
-  let seconds = time % 60;
-
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  countdownEl.innerHTML = `${minutes}:${seconds}`;
-  time--;
-
-  if (time < 0) {
-    countdownEl.innerHTML = "Time's Up!";
-  }
-}
-
-var startButton = document.querySelector("#start-button");
+var startButton = document.getElementById("start-button");
 
 startButton.addEventListener("click", function () {
-  updateCountdown();
+  function startTimer() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    countdownEl.innerHTML = `${minutes}:${seconds}`;
+    time--;
+
+    if (time < 0) {
+      countdownEl.innerHTML = "Time's Up!";
+    }
+  }
 });
 
 //////////////SEPARATOR
@@ -80,4 +79,4 @@ startButton.addEventListener("click", function () {
 //   // set the empty array in local storage
 // }
 
-// myArray.push({ scottSterling: 23 });
+// myArray.push({ scottSterling: 6 });
