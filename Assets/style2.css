@@ -16,6 +16,11 @@ body {
   flex-direction: column;
 }
 
+#introQuip {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
 body.correct {
   background-color: green;
 }
@@ -91,7 +96,9 @@ header {
 }
 
 footer {
-  text-align: center;
+  justify-content: center;
   background-color: white;
   height: 2rem;
+  display: flex;
+  align-items: flex-end;
 }

@@ -5,26 +5,28 @@ var answerButtonsEl = document.getElementById("answer-buttons");
 var nextButton = document.getElementById("next-btn");
 var shuffledQuestions, currentQuestionIndex;
 var timerEl = document.getElementById("timer");
+var minus10 = false;
+var introQuip = document.getElementById("introQuip");
+var timeLeft = 90;
+var score = timeLeft;
+var questionsRemaining = 4;
 
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
+  questionsRemaining--;
+  console.log(questionsRemaining);
   nextQuestion();
 });
 
 function startQuiz() {
-  alert("The timer is about to begin.");
+  introQuip.remove();
   countdown();
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
   questionContainerEl.classList.remove("hide");
   nextQuestion();
-}
-
-function nextQuestion() {
-  reset();
-  showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 function showQuestion(question) {
@@ -39,6 +41,11 @@ function showQuestion(question) {
     button.addEventListener("click", selectAnswer);
     answerButtonsEl.appendChild(button);
   });
+}
+
+function nextQuestion() {
+  reset();
+  showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 function reset() {
@@ -62,6 +69,9 @@ function selectAnswer(e) {
     startButton.innerText = "Restart Quiz?";
     startButton.classList.remove("hide");
   }
+  if (shuffledQuestions < currentQuestionIndex) {
+    endQuiz();
+  }
 }
 
 function setStatusClass(element, correct) {
@@ -70,6 +80,7 @@ function setStatusClass(element, correct) {
     element.classList.add("correct");
   } else {
     element.classList.add("wrong");
+    minus10 = true;
   }
 }
 
@@ -78,58 +89,82 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
+function endQuiz() {
+  clearInterval(countdown);
+}
+
 var questions = [
   {
-    question: "My first question",
+    question: "Commonly used data types DO Not Include:",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: false },
-      { text: "answer 3", correct: true },
-      { text: "answer 4", correct: false },
+      { text: "strings", correct: false },
+      { text: "booleans", correct: false },
+      { text: "alerts", correct: true },
+      { text: "numbers", correct: false },
     ],
   },
   {
-    question: "My second question",
+    question: "The condition in an if / else statement is enclosed with:",
     answers: [
-      { text: "answer 1", correct: true },
-      { text: "answer 2", correct: false },
-      { text: "answer 3", correct: false },
-      { text: "answer 4", correct: false },
+      { text: "quotes", correct: false },
+      { text: "curly braces", correct: true },
+      { text: "parentheses", correct: false },
+      { text: "square brackets", correct: false },
     ],
   },
   {
-    question: "My third question",
+    question: "Arrays in JavaScript can be used to store:",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: false },
-      { text: "answer 3", correct: false },
-      { text: "answer 4", correct: true },
+      { text: "numbers/strings", correct: false },
+      { text: "other arrays", correct: false },
+      { text: "booleans", correct: false },
+      { text: "all of the above", correct: true },
     ],
   },
   {
-    question: "My fourth question",
+    question:
+      "String values must be enclosed with _______ when being assigned to variables.",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: false },
-      { text: "answer 3", correct: true },
-      { text: "answer 4", correct: false },
+      { text: "commas", correct: false },
+      { text: "curly braces", correct: false },
+      { text: "quotes", correct: true },
+      { text: "parentheses", correct: false },
+    ],
+  },
+  {
+    question:
+      "A very useful tool to use during development and debugging for printing content to the debugger is:",
+    answers: [
+      { text: "Javascript", correct: false },
+      { text: "terminal/bash", correct: false },
+      { text: "for loops", correct: false },
+      { text: "console.log", correct: true },
     ],
   },
 ];
 
 function countdown() {
-  var sec = 30;
-  console.log("timer suppose to go");
-  var timer = setInterval(function () {
-    sec--;
-    document.getElementById("timer").innerHTML = sec;
-    if (sec < 0) {
-      clearInterval(timer);
-      alert("Time is up!");
+  var timeInterval = setInterval(function () {
+    if (questionsRemaining === 0) {
+      return;
+    } else {
+      if (timeLeft > 1) {
+        if (minus10) {
+          timeLeft -= 10;
+          timerEl.textContent = timeLeft + " seconds left";
+          minus10 = false;
+        } else {
+          timerEl.textContent = timeLeft + " seconds left";
+          timeLeft--;
+        }
+      } else if (timeLeft === 1) {
+        timerEl.textContent = timeLeft + " second left";
+        timeLeft--;
+      } else {
+        timerEl.textContent = timeLeft + " seconds left";
+        clearInterval(timeInterval);
+        timerEl.textContent = "GAME OVER";
+      }
     }
   }, 1000);
 }
-document.getElementsByClassName("wrong").addEventListener("click", function () {
-  sec -= 10;
-  document.getElementById("timer").innerHTML = sec;
-});
