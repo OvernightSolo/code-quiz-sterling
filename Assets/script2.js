@@ -67,7 +67,9 @@ function selectAnswer(e) {
     nextButton.classList.remove("hide");
   } else {
     startButton.innerText =
-      "Your final score is " + timeLeft + ". Refresh to start again.";
+      "Your score is " +
+      timeLeft +
+      ". Enter your score in the High Scores link, or refresh page to play again.";
     startButton.classList.remove("hide");
     countdown();
   }

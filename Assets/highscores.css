@@ -3,7 +3,9 @@ body {
   background-color: antiquewhite;
 }
 
-.input-info {
+#input-name,
+#input-score,
+#input-submit {
   display: block;
   margin-top: 20px;
   margin-bottom: 20px;

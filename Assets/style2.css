@@ -34,6 +34,10 @@ header {
   color: blue;
 }
 
+#high-scores:hover {
+  color: orangered;
+}
+
 #introQuip {
   text-align: center;
   padding-bottom: 30px;
