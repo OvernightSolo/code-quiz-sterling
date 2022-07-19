@@ -16,6 +16,24 @@ body {
   flex-direction: column;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  height: 55px;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#high-scores:visited {
+  color: black;
+}
+
+#high-scores:active {
+  color: blue;
+}
+
 #introQuip {
   text-align: center;
   padding-bottom: 30px;
@@ -83,16 +101,6 @@ body.wrong {
 
 .hide {
   display: none;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  height: 55px;
-  align-items: center;
-  font-size: 2rem;
-  font-weight: bold;
 }
 
 footer {

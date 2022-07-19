@@ -1,0 +1,14 @@
+body {
+  font-family: Roboto;
+  background-color: antiquewhite;
+}
+
+.input-info {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#back-to-game {
+  font-size: larger;
+}

@@ -7,7 +7,7 @@ var shuffledQuestions, currentQuestionIndex;
 var timerEl = document.getElementById("timer");
 var minus10 = false;
 var introQuip = document.getElementById("introQuip");
-var timeLeft = 90;
+var timeLeft = 75;
 var score = timeLeft;
 var questionsRemaining = 4;
 
@@ -66,8 +66,10 @@ function selectAnswer(e) {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
-    startButton.innerText = "Restart Quiz?";
+    startButton.innerText =
+      "Your final score is " + timeLeft + ". Refresh to start again.";
     startButton.classList.remove("hide");
+    countdown();
   }
   if (shuffledQuestions < currentQuestionIndex) {
     endQuiz();
