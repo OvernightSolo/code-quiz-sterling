@@ -9,7 +9,6 @@
 body {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
   width: 100vw;
   height: 100vh;
   background-color: grey;
@@ -24,31 +23,7 @@ header {
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-#high-scores:visited {
-  color: black;
-}
-
-#high-scores:active {
-  color: blue;
-}
-
-#high-scores:hover {
-  color: orangered;
-}
-
-#introQuip {
-  text-align: center;
-  padding-bottom: 30px;
-}
-
-body.correct {
-  background-color: green;
-}
-
-body.wrong {
-  background-color: red;
+  padding
 }
 
 .container {
@@ -66,6 +41,19 @@ body.wrong {
   grid-template-columns: repeat(2, auto);
   gap: 15px;
   margin: 20px 0;
+}
+
+#introQuip {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+body.correct {
+  background-color: green;
+}
+
+body.wrong {
+  background-color: red;
 }
 
 .btn {
@@ -113,4 +101,25 @@ footer {
   height: 2rem;
   display: flex;
   align-items: flex-end;
+}
+
+#high-scores:visited {
+  color: black;
+}
+
+#high-scores:active {
+  color: blue;
+}
+
+#high-scores:hover {
+  color: orangered;
+}
+
+#high-scores {
+  margin-left: 8px;
+}
+
+#timer {
+  margin-right: 8px;
+  
 }

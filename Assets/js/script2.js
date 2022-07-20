@@ -1,3 +1,4 @@
+//VARIABLE SETUP
 var startButton = document.getElementById("start-btn");
 var questionContainerEl = document.getElementById("question-container");
 var questionElement = document.getElementById("question");
@@ -11,6 +12,7 @@ var timeLeft = 75;
 var score = timeLeft;
 var questionsRemaining = 4;
 
+//CLICK EVENT THAT WILL INITIALIZE QUIZ
 startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
@@ -19,6 +21,34 @@ nextButton.addEventListener("click", () => {
   nextQuestion();
 });
 
+//TIMER FUNCTION
+function countdown() {
+  var timeInterval = setInterval(function () {
+    if (questionsRemaining === 0) {
+      return;
+    } else {
+      if (timeLeft > 1) {
+        if (minus10) {
+          timeLeft -= 10;
+          timerEl.textContent = timeLeft + " seconds left";
+          minus10 = false;
+        } else {
+          timerEl.textContent = timeLeft + " seconds left";
+          timeLeft--;
+        }
+      } else if (timeLeft === 1) {
+        timerEl.textContent = timeLeft + " second left";
+        timeLeft--;
+      } else {
+        timerEl.textContent = timeLeft + " seconds left";
+        clearInterval(timeInterval);
+        timerEl.textContent = "GAME OVER";
+      }
+    }
+  }, 1000);
+}
+
+//LEAVE INTRO CARD AND RANDOMIZE QUESTION ORDER
 function startQuiz() {
   introQuip.remove();
   countdown();
@@ -29,6 +59,7 @@ function startQuiz() {
   nextQuestion();
 }
 
+//INTRODUCE EACH QUESTION
 function showQuestion(question) {
   questionElement.innerText = question.question;
   question.answers.forEach((answer) => {
@@ -43,6 +74,24 @@ function showQuestion(question) {
   });
 }
 
+//QUALIFY ANSWER AS CORRECT OR INCORRECT AND DISPLAY CORRESPONDING BUTTON AND BACKGROUND COLOR
+function setStatusClass(element, correct) {
+  clearStatusClass(element);
+  if (correct) {
+    element.classList.add("correct");
+  } else {
+    element.classList.add("wrong");
+    minus10 = true;
+  }
+}
+
+//UPON NEXT QUESTION, CLEAR COLORS
+function clearStatusClass(element) {
+  element.classList.remove("correct");
+  element.classList.remove("wrong");
+}
+
+//MOVE TO NEXT QUESTION AT RANDOM
 function nextQuestion() {
   reset();
   showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -56,6 +105,7 @@ function reset() {
   }
 }
 
+//DETERMINE IF GAME IS OVER
 function selectAnswer(e) {
   var selectedButton = e.target;
   var correct = selectedButton.dataset.correct;
@@ -78,25 +128,12 @@ function selectAnswer(e) {
   }
 }
 
-function setStatusClass(element, correct) {
-  clearStatusClass(element);
-  if (correct) {
-    element.classList.add("correct");
-  } else {
-    element.classList.add("wrong");
-    minus10 = true;
-  }
-}
-
-function clearStatusClass(element) {
-  element.classList.remove("correct");
-  element.classList.remove("wrong");
-}
-
+//IF GAME IS OVER, STOP THE TIMER
 function endQuiz() {
   clearInterval(countdown);
 }
 
+//ARRAY OF QUIZ QUESTIONS
 var questions = [
   {
     question: "Commonly used data types DO Not Include:",
@@ -146,29 +183,3 @@ var questions = [
     ],
   },
 ];
-
-function countdown() {
-  var timeInterval = setInterval(function () {
-    if (questionsRemaining === 0) {
-      return;
-    } else {
-      if (timeLeft > 1) {
-        if (minus10) {
-          timeLeft -= 10;
-          timerEl.textContent = timeLeft + " seconds left";
-          minus10 = false;
-        } else {
-          timerEl.textContent = timeLeft + " seconds left";
-          timeLeft--;
-        }
-      } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + " second left";
-        timeLeft--;
-      } else {
-        timerEl.textContent = timeLeft + " seconds left";
-        clearInterval(timeInterval);
-        timerEl.textContent = "GAME OVER";
-      }
-    }
-  }, 1000);
-}
