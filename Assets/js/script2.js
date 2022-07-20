@@ -74,7 +74,7 @@ function showQuestion(question) {
   });
 }
 
-//QUALIFY ANSWER AS CORRECT OR INCORRECT AND DISPLAY CORRESPONDING BUTTON AND BACKGROUND COLOR
+/* QUALIFY ANSWER AS CORRECT OR INCORRECT AND DISPLAY CORRESPONDING BUTTON AND BACKGROUND COLOR */
 function setStatusClass(element, correct) {
   clearStatusClass(element);
   if (correct) {
