@@ -121,7 +121,6 @@ function selectAnswer(e) {
       timeLeft +
       ". Enter your score in the High Scores link, or refresh page to play again.";
     startButton.classList.remove("hide");
-    countdown();
   }
   if (shuffledQuestions < currentQuestionIndex) {
     endQuiz();
