@@ -27,6 +27,8 @@ IF the user does not answer all questions before the timer is up, "GAME OVER" ap
 If the user chooses, his or her name and score can be manually entered by clicking on High Scores on the main page, which links to a new page. Local storage allows for the name and score to stay on page, even upon reload.
 ![score page](assets/images/score-page-local-storage.png)
 
+Link to deployed application: https://overnightsolo.github.io/weekly-challenge-4/
+
 #### File Outline
 
 Two files for each extension type (one for the main page and one for the High Scores page):
